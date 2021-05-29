@@ -1,0 +1,27 @@
+<div class="form-wrapper">
+  <div class="bg"></div>
+  <mat-card>
+    <mat-card-title color="primary">
+      Welcome Back!
+    </mat-card-title>
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="Insert your e-mail" type="email" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Insert your password" type="password" required>
+      </mat-form-field>
+      <mat-card-actions>
+        <button mat-flat-button>
+          Register
+        </button>
+        <button mat-flat-button color="primary">
+          Login
+          <mat-spinner *ngIf="loading" diameter="30"></mat-spinner>
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>  
