@@ -41,6 +41,12 @@ form {
   margin: 0;
 }
 
+app-loading-button,
+.mat-flat-button
+{
+  width: 100%;
+}
+
 .mat-card-actions {
   width: 100%;
   display: flex;
@@ -49,11 +55,6 @@ form {
   justify-content: center;
 }
 
-.mat-flat-button {
-  width: 100%;
+.mat-form-field {
+  margin-bottom: 2px;
 }
-
-.mat-flat-button ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #fff;
-}
-
