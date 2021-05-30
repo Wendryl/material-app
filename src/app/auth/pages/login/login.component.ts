@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { UserLoginDTO } from '../../models/user-login-dto';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css', '../common.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private user: UserLoginDTO,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -54,11 +56,22 @@ export class LoginComponent implements OnInit {
     return;
   }
 
-  submitForm() {
+  intiateRequest(): void {
     this.serverRequested = true;
     this.loading = true;
+  }
+
+  clearRequest(): void {
+    this.serverRequested = false;
+    this.loading = false;
+  }
+
+  submitForm(): void {
+    this.intiateRequest();
 
     if(this.form.invalid) {
+      this.clearRequest();
+      this.snackBar.open('Please fill in all fields correctly!', 'Error!', this.snackConfig);
       return;
     }
 
@@ -69,12 +82,15 @@ export class LoginComponent implements OnInit {
           if(data.status == 200) {
             this.snackBar.open('Login success!', 'Nice!', this.snackConfig);
           } else {
-            this.snackBar.open('Your e-mail or password is wrong!', 'Error!', this.snackConfig);
+            this.snackBar.open('Incorrect e-mail or password!', 'Error!', this.snackConfig);
           }
-          this.loading = false;
-          this.serverRequested = false;
+          this.clearRequest();
         }
       )
+  }
+
+  register(): void {
+    this.router.navigate(['/register']);
   }
 
 }

@@ -4,7 +4,7 @@
     <mat-card-title color="primary">
       Welcome Back!
     </mat-card-title>
-    <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <form [formGroup]="form">
       <mat-form-field appearance="outline">
         <mat-label>E-mail</mat-label>
         <input matInput placeholder="Insert your e-mail" type="email" required formControlName="email">
@@ -16,10 +16,10 @@
         <mat-error *ngIf="this.form.invalid">{{ getPasswordError() }}</mat-error>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-flat-button>
+        <button mat-flat-button (click)="register()">
           Register
         </button>
-        <app-loading-button label="Login" [loading]="loading"></app-loading-button>
+        <app-loading-button label="Login" [loading]="loading" (ngSubmit)="submitForm()"></app-loading-button>
       </mat-card-actions>
     </form>
   </mat-card>
