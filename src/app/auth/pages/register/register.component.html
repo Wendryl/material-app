@@ -1,0 +1,36 @@
+<div class="form-wrapper">
+  <div class="bg"></div>
+  <mat-card>
+    <mat-card-title color="primary">
+      Register
+    </mat-card-title>
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Insert your name" type="text" required formControlName="name">
+        <mat-error *ngIf="this.form.invalid">{{ getNameError() }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="Insert your e-mail" type="email" required formControlName="email">
+        <mat-error *ngIf="this.form.invalid">{{ getEmailError() }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Insert your password" type="password" required formControlName="password">
+        <mat-error *ngIf="this.form.invalid">{{ getPasswordError() }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Insert your password" type="password" required formControlName="confirmPassword">
+        <mat-error *ngIf="this.form.controls.password != this.form.controls.confirmPassword">{{ getPasswordMismatchError() }}</mat-error>
+      </mat-form-field>
+      <mat-card-actions>
+        <button mat-flat-button (click)="back()">
+          Back to login
+        </button>
+        <app-loading-button label="Login" [loading]="loading" (ngSubmit)="submitForm()"></app-loading-button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>  
